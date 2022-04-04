@@ -23,6 +23,8 @@ def TestInfoCaballos():
         print("El caballo #",ListaCaballos[i].ID, ",hizo el tiempo:",ListaCaballos[i].Tiempo,
              ",\nes del grupo:", ListaCaballos[i].Grupo,", y su pos int:", ListaCaballos[i].PosicionInterna,
              "y su ranking Global es:",ListaCaballos[i].RankingGlobal)
+        print("////////////////////////////////////////////////////////")
+
 
 def CreacionCaballos():
     for i in range(25):
@@ -94,6 +96,10 @@ for i in range (25):
         ListaCaballos[i].RankingGlobal=3
 
 TestInfoCaballos()
-
+print("/////////////////////////////////////////////////////")
+print("Gracias a estos resultados podemos obnservar que en efecto 7 carreras son las minimas para obtener"
+      " los 2 (o hasta 3) caballos más rápidos de los 25. Siendo los que anteriormente se mostraron con su ranking"
+      " global de '1', '2' o '3'")
+print("/////////////////////////////////////////////////////")
 
 
