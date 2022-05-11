@@ -5,7 +5,11 @@
 #       6E2
 from random import seed
 from random import random
-seed(6)
+import networkx as nx
+import matplotlib.pyplot as plt
+import numpy as np
+
+seed(3) #Modificar para cambiar los valores random
 
 class Caballo:
     Tiempo=0
@@ -161,4 +165,18 @@ print("Gracias a estos resultados podemos obnservar que en efecto 7 carreras son
       " global de '1', '2' o '3'")
 print("/////////////////////////////////////////////////////")
 
+### Implementación del grafo:
 
+Grafo = nx.Graph()
+i=0
+for element in NuevaListaCaballos:
+    name= "#"+ str(i)+": "+str(element.ID)
+    Grafo.add_node(name)
+    if i!=0:
+        index=NuevaListaCaballos.index(element)-1
+        Grafo.add_edge("#"+ str(i)+": "+str(element.ID),"#"+ str(i-1)+": "+str(NuevaListaCaballos[index].ID))
+        #Grafo["#"+ str(i)+": "+str(element.ID)]["#"+ str(i-1)+": "+str(NuevaListaCaballos[index].ID)]['name']=
+    i+=1
+#Grafo.edges(data=True)
+nx.draw(Grafo, node_color='blue', with_labels=True)
+plt.show()
