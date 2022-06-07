@@ -98,17 +98,43 @@ for key in DiccNodos:
 #Testeo
 TestDic(DiccNodos)
 
-#Muestrame el grafo:
+#///////////////////////////  Grafo  ///////////////////////////
 
 Grafo=nx.Graph()
+#for nodo in DiccNodos:
+#    Grafo.add_node(nodo, color= "blue")
+
+#Asignación de propiedades y relación entre nodos y aristas
 for nodo in DiccNodos:
-    Grafo.add_node(nodo)
-
-for key in DiccNodos:
-     for llave in DiccNodos[key]:
-         Grafo.add_edge(key,llave)
-
+     Grafo.add_node(nodo, color= "blue")
+     for llave in DiccNodos[nodo]:
+         Grafo.add_edge(nodo,llave,color="black",value=(str(DiccNodos[nodo].get(llave))+" udif"))
+         #udif= Unidades de Dificultad
 
 
-nx.draw(Grafo, node_color='red', with_labels=True)
+#Obten los colores de los nodos y edges:
+
+edges,EdgCol=zip(*nx.get_edge_attributes(Grafo, 'color').items())
+nodes, NodCol=zip(*nx.get_node_attributes(Grafo, 'color').items())
+
+#Obtiene el valor de los edges (aristas)
+EdgLab=nx.get_edge_attributes(Grafo, 'value')
+
+#Posición para el comando de show lables.
+pos=nx.spring_layout(Grafo)
+
+#Prueba para mostrar los valores y propiedades de las aristas.
+#print(nx.get_edge_attributes(grafo, 'color'))
+#print("//////////////////")
+#print(edglab)
+
+nx.draw(Grafo,pos, node_color=NodCol, edge_color=EdgCol, with_labels=True)
+nx.draw_networkx_edge_labels(Grafo,pos,edge_labels=EdgLab)
 plt.show()
+
+
+#### NEXT STEPS:
+# 1. Verificar que los udif entre nodos sean coherentes (0 codigo)
+# 2. Diseñar el algoritmo Dijkstra para identificar la ruta por los nodos con menos udif's (0 grafos)
+# 3. Modificar los valores de las propiedades de estos nodos y aristas para destacar el camino más rapido
+#    (100% grafo)
