@@ -70,6 +70,45 @@ for key in DiccNodos:
 #Testeo
 TestDic(DiccNodos)
 
+#///////////////////////////  Dijkstra Algorithm  ///////////////////////////
+
+def get_key(val, pos, Dicc):
+    j=0
+    for key, value in Dicc.items():
+        if val==value:
+            if pos==j:
+                return key
+            else:
+                j=j+1
+    return "Key does not exist"
+
+CaminoMasCorto=[]
+Temporal=[]
+nodo='Inicio'
+while(len(CaminoMasCorto)==0 or CaminoMasCorto[-1]!= 'Fin'):
+        if nodo == 'Fin':
+            CaminoMasCorto.append(nodo)
+        else:
+            if nodo == 'Inicio':
+                CaminoMasCorto.append(nodo)
+            for NodoAledaño in DiccNodos[nodo]:
+                Temporal.append(DiccNodos[nodo].get(NodoAledaño))
+            Temporal.sort()
+            i=0
+            Pos=0
+            NextNodo=get_key(Temporal[i],Pos,DiccNodos[nodo])
+            while (NextNodo in CaminoMasCorto):
+                i=i+1
+                if Temporal[i]== Temporal[i-1]:
+                    Pos=Pos+1
+                NextNodo=get_key(Temporal[i],Pos,DiccNodos[nodo]) #Me está dando el 3 en la lista porque get key toma la primer llave con ese value
+            CaminoMasCorto.append(NextNodo)
+            Temporal.clear()
+            nodo=CaminoMasCorto[-1] 
+
+print("El camino más corto es:",CaminoMasCorto) #debería de ser Inicio-2-4-5-3-7-Fin
+
+
 #///////////////////////////  Grafo  ///////////////////////////
 
 Grafo=nx.Graph()
